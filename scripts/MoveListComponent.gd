@@ -22,6 +22,6 @@ class_name MoveListComponent extends Node
 @export var jumping_MK : Attack
 @export var jumping_HK : Attack
 
-var standing_control_dict = {"lp" : standing_LP}
+var standing_control_dict = {"lp" : standing_LP, "mp" : standing_MP, "hp" : standing_HP}
 var crouching_control_dict = {}
 var jumping_control_dict = {}

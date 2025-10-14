@@ -1,5 +1,7 @@
 class_name Fighter extends CharacterBody2D
 
+signal send_attack(attack)
+
 @onready var _sprite: AnimatedSprite2D = $PlayerSprites
 @onready var _state_chart: StateChart = $StateChart
 @onready var _animation_tree : AnimationTree = $AnimationTree
@@ -53,14 +55,26 @@ func _on_jump_enabled_state_physics_processing(delta):
 
 
 func _on_attack_enabled_state_input(event):
-	if Input.is_anything_pressed():
-		for attack in MoveList.standing_control_dict:
-			if Input.is_action_just_pressed(attack):
-				current_attack = attack
-				_state_chart.send_event("standing_" + attack)
+	var current_movelist = MoveList.standing_control_dict
+	if !is_on_floor():
+		current_movelist = MoveList.jumping_control_dict
+	elif is_crouching:
+		current_movelist = MoveList.crouching_control_dict
+	else:
+		current_movelist = MoveList.standing_control_dict
+	for attack in current_movelist:
+		if Input.is_action_just_pressed(attack):
+			current_attack = attack
+			if !is_on_floor():
+				_state_chart.send_event("jumping_" + attack)
+			elif is_crouching:
+				_state_chart.send_event("crouching_" + attack)
 			else:
-				print("No attack found.")
-
+				_state_chart.send_event("standing_" + attack)
+			send_attack.emit(current_attack)
+		else:
+			pass
+		
 func _on_attacking_state_entered():
 	_animation_state_machine.travel(current_attack)
 

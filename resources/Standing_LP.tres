@@ -4,7 +4,8 @@
 
 [resource]
 script = ExtResource("1_fndlm")
-attackName = "Standing_LP"
-attackInput = "LightPunch"
-attackType = "Standing"
-attackAnim = "LightPunch"
+animation = ""
+command = ""
+damage = 0
+hitstun = 0.0
+hitstop = 0.0
