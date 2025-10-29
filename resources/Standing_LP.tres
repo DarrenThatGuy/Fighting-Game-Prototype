@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_fndlm")
 animation = ""
-command = ""
+has_command = false
+command = ["lp"]
 damage = 0
 hitstun = 0.0
 hitstop = 0.0
