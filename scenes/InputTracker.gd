@@ -30,8 +30,10 @@ func _process(delta):
 
 func _on_base_character_send_attack(attack):
 	input_buffer.append(attack)
+	print(input_buffer)
 	for attack_resource in commands:
-		find_command(input_buffer, attack_resource)
+		if find_command(input_buffer, attack_resource) == attack:
+			pass
 	input_buffer.clear()
 
 func get_numpad_direction(direction_vector: Vector2) -> String:
@@ -62,19 +64,20 @@ func find_command(current_command : Array, attack : Attack) -> Attack:
 	var index = 0
 	var command_index = 0
 	print(current_command)
-	print(attack.command)
 	if command_to_check.size() > current_command.size():
 		return null
 	while index <= current_command.size()-1 and command_index <= command_to_check.size()-1:
 		if current_command[index] == command_to_check[command_index]:
 			attack_to_match.append(current_command[index])
+			print(attack_to_match)
 			index += 1
 			command_index += 1
 		else:
 			index += 1
-	if attack_to_match == attack.command:
+	if attack_to_match == command_to_check:
+		print(attack)
 		return attack
 	else:
-		print("No Match Found")
 		return null
+		print("no")
 	return null
