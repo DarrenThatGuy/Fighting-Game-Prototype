@@ -1,5 +1,6 @@
 class_name RyuMoveListComponent extends MoveListComponent
 
+signal command_animation(command)
 
 
 @export var LHado : Attack
@@ -16,9 +17,19 @@ class_name RyuMoveListComponent extends MoveListComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(command_attacks)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_input_tracker_command_move(command : Attack):
+	command_animation.emit(command.name)
+	if command == LHado or command == MHado or command == HHado:
+		print("Shoot Hadoken Projectile")
+	elif command == LShoryu or command == MShoryu or command == HShoryu:
+		print("Do Uppercut animation with hitboxes")
+	elif command == LTatsu or command == MTatsu or command == HTatsu:
+		print("Do Tatsu animation with hitboxes")

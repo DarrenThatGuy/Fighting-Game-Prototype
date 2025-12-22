@@ -1,11 +1,14 @@
 extends Node2D
 
+@export var character_move_list : MoveListComponent
+@onready var commands = character_move_list.command_attacks
+
 var framecount = 0
 var input_direction = Input.get_vector("Left", 'Right', "Up", "Down")
 var input_buffer = []
-@export var character_move_list : MoveListComponent
 var input_buffer_max_size = 15
-@onready var commands = character_move_list.command_attacks
+
+signal command_move(command)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +33,9 @@ func _process(delta):
 
 func _on_base_character_send_attack(attack):
 	input_buffer.append(attack)
-	print(input_buffer)
 	for attack_resource in commands:
-		if find_command(input_buffer, attack_resource) == attack:
-			pass
+		if find_command(input_buffer, attack_resource) == attack_resource:
+			command_move.emit(attack_resource)
 	input_buffer.clear()
 
 func get_numpad_direction(direction_vector: Vector2) -> String:
@@ -63,21 +65,18 @@ func find_command(current_command : Array, attack : Attack) -> Attack:
 	var command_to_check = attack.command
 	var index = 0
 	var command_index = 0
-	print(current_command)
 	if command_to_check.size() > current_command.size():
 		return null
 	while index <= current_command.size()-1 and command_index <= command_to_check.size()-1:
 		if current_command[index] == command_to_check[command_index]:
 			attack_to_match.append(current_command[index])
-			print(attack_to_match)
 			index += 1
 			command_index += 1
 		else:
 			index += 1
 	if attack_to_match == command_to_check:
-		print(attack)
+		print(attack.command)
 		return attack
 	else:
 		return null
-		print("no")
 	return null

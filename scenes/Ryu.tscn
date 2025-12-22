@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://bccgdi3tnkl41"]
+[gd_scene load_steps=107 format=3 uid="uid://bccgdi3tnkl41"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_2iqxl"]
 [ext_resource type="Script" path="res://scenes/InputTracker.gd" id="2_48os6"]
@@ -24,6 +24,9 @@
 [ext_resource type="Resource" uid="uid://dqed7gx26sdo8" path="res://resources/Tatsu_L.tres" id="9_ex0yr"]
 [ext_resource type="Resource" uid="uid://cfq28fxyoq1wu" path="res://resources/Tatsu_M.tres" id="10_j8hcs"]
 [ext_resource type="Resource" uid="uid://dh6mfft4jaa7g" path="res://resources/Tatsu_H.tres" id="11_4b75i"]
+[ext_resource type="Resource" uid="uid://ds85dyjyewel0" path="res://resources/Standing_LK.tres" id="15_2c0sb"]
+[ext_resource type="Resource" uid="uid://bwqfr10mj67n" path="res://resources/Standing_MK.tres" id="16_itdab"]
+[ext_resource type="Resource" uid="uid://ch7ya6domd11c" path="res://resources/Standing_HK.tres" id="17_vf2ou"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5y5e"]
 atlas = ExtResource("2_k6g6t")
@@ -319,6 +322,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn3v7"]
 size = Vector2(79, 3)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d1b4d"]
+animation = &"Hadoken_L"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o8m1l"]
 animation = &"Idle"
 
@@ -334,11 +340,20 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_d8ynp")
 blend_point_1/pos = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r3bl4"]
+animation = &"hk"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2tkb"]
 animation = &"hp"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lneju"]
+animation = &"lk"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_srv2h"]
 animation = &"lp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fbitx"]
+animation = &"mk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ab601"]
 animation = &"mp"
@@ -362,20 +377,44 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_udxcx"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d555p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yserg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqmcs"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_itkos"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2oj5b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0csvk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r171n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0jvna"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0o85r"]
 states/End/position = Vector2(1242, -26)
+states/Hadoken_L/node = SubResource("AnimationNodeAnimation_d1b4d")
+states/Hadoken_L/position = Vector2(736, 191)
 states/Idle/node = SubResource("AnimationNodeAnimation_o8m1l")
-states/Idle/position = Vector2(333, 100)
+states/Idle/position = Vector2(363, 78)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_d4qik")
 states/Move/position = Vector2(516, 100)
+states/hk/node = SubResource("AnimationNodeAnimation_r3bl4")
+states/hk/position = Vector2(623, 287)
 states/hp/node = SubResource("AnimationNodeAnimation_h2tkb")
-states/hp/position = Vector2(508, 182)
+states/hp/position = Vector2(623, 191)
+states/lk/node = SubResource("AnimationNodeAnimation_lneju")
+states/lk/position = Vector2(141, 287)
 states/lp/node = SubResource("AnimationNodeAnimation_srv2h")
-states/lp/position = Vector2(333, 182)
+states/lp/position = Vector2(141, 191)
+states/mk/node = SubResource("AnimationNodeAnimation_fbitx")
+states/mk/position = Vector2(425, 279)
 states/mp/node = SubResource("AnimationNodeAnimation_ab601")
-states/mp/position = Vector2(415, 182)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "lp", SubResource("AnimationNodeStateMachineTransition_7mp65"), "lp", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "mp", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "mp", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "hp", SubResource("AnimationNodeStateMachineTransition_68186"), "hp", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx")]
-graph_offset = Vector2(-42, 82)
+states/mp/position = Vector2(425, 191)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "lp", SubResource("AnimationNodeStateMachineTransition_7mp65"), "lp", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "mp", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "mp", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "hp", SubResource("AnimationNodeStateMachineTransition_68186"), "hp", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx"), "Idle", "lk", SubResource("AnimationNodeStateMachineTransition_d555p"), "lk", "Idle", SubResource("AnimationNodeStateMachineTransition_yserg"), "Idle", "mk", SubResource("AnimationNodeStateMachineTransition_eqmcs"), "mk", "Idle", SubResource("AnimationNodeStateMachineTransition_itkos"), "Idle", "hk", SubResource("AnimationNodeStateMachineTransition_2oj5b"), "hk", "Idle", SubResource("AnimationNodeStateMachineTransition_0csvk"), "Idle", "Hadoken_L", SubResource("AnimationNodeStateMachineTransition_r171n"), "Hadoken_L", "Idle", SubResource("AnimationNodeStateMachineTransition_0jvna")]
+graph_offset = Vector2(25, 53)
 
 [sub_resource type="Animation" id="Animation_gpguy"]
 resource_name = "Idle"
@@ -573,14 +612,126 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_cxikq"]
+resource_name = "lk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hspts"]
+resource_name = "mk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jqeru"]
+resource_name = "hk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2dktq"]
+resource_name = "Hadoken_L"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_deb8v"]
 _data = {
+"Hadoken_L": SubResource("Animation_2dktq"),
 "Idle": SubResource("Animation_gpguy"),
 "RESET": SubResource("Animation_q2uky"),
 "WalkBack": SubResource("Animation_6306p"),
 "WalkForward": SubResource("Animation_o2v5g"),
+"hk": SubResource("Animation_jqeru"),
 "hp": SubResource("Animation_kakdr"),
+"lk": SubResource("Animation_cxikq"),
 "lp": SubResource("Animation_wdfs3"),
+"mk": SubResource("Animation_hspts"),
 "mp": SubResource("Animation_fatg6")
 }
 
@@ -603,6 +754,9 @@ HTatsu = ExtResource("11_4b75i")
 standing_LP = ExtResource("6_sp3dc")
 standing_MP = ExtResource("7_o50mo")
 standing_HP = ExtResource("8_obkdt")
+standing_LK = ExtResource("15_2c0sb")
+standing_MK = ExtResource("16_itdab")
+standing_HK = ExtResource("17_vf2ou")
 
 [node name="InputTracker" type="Node2D" parent="." node_paths=PackedStringArray("character_move_list")]
 script = ExtResource("2_48os6")
@@ -647,14 +801,38 @@ delay_in_seconds = "0.0"
 
 [node name="On Standing Medium Punch2" type="Node" parent="StateChart/Root/Grounded"]
 script = ExtResource("8_fl8ti")
-to = NodePath("../../StandingLP")
+to = NodePath("../../StandingMP")
 event = &"standing_mp"
 delay_in_seconds = "0.0"
 
 [node name="On Standing Heavy Punch3" type="Node" parent="StateChart/Root/Grounded"]
 script = ExtResource("8_fl8ti")
-to = NodePath("../../StandingLP")
+to = NodePath("../../StandingHP")
 event = &"standing_hp"
+delay_in_seconds = "0.0"
+
+[node name="On Standing Light Kick" type="Node" parent="StateChart/Root/Grounded"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../StandingLK")
+event = &"standing_lk"
+delay_in_seconds = "0.0"
+
+[node name="On Standing Medium Kick" type="Node" parent="StateChart/Root/Grounded"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../StandingMK")
+event = &"standing_mk"
+delay_in_seconds = "0.0"
+
+[node name="On Standing Heavy Kick" type="Node" parent="StateChart/Root/Grounded"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../StandingHK")
+event = &"standing_hk"
+delay_in_seconds = "0.0"
+
+[node name="On L Hadoken" type="Node" parent="StateChart/Root/Grounded"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../Hadoken_L")
+event = &"l_hadoken"
 delay_in_seconds = "0.0"
 
 [node name="Airborne" type="Node" parent="StateChart/Root"]
@@ -693,6 +871,42 @@ to = NodePath("../../Grounded")
 event = &"grounded"
 delay_in_seconds = "0.0"
 
+[node name="StandingLK" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_77jbi")
+
+[node name="On Grounded" type="Node" parent="StateChart/Root/StandingLK"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../Grounded")
+event = &"grounded"
+delay_in_seconds = "0.0"
+
+[node name="StandingMK" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_77jbi")
+
+[node name="On Grounded" type="Node" parent="StateChart/Root/StandingMK"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../Grounded")
+event = &"grounded"
+delay_in_seconds = "0.0"
+
+[node name="StandingHK" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_77jbi")
+
+[node name="On Grounded" type="Node" parent="StateChart/Root/StandingHK"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../Grounded")
+event = &"grounded"
+delay_in_seconds = "0.0"
+
+[node name="Hadoken_L" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_77jbi")
+
+[node name="On Grounded" type="Node" parent="StateChart/Root/Hadoken_L"]
+script = ExtResource("8_fl8ti")
+to = NodePath("../../Grounded")
+event = &"grounded"
+delay_in_seconds = "0.0"
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 callback_mode_process = 0
 tree_root = SubResource("AnimationNodeStateMachine_0o85r")
@@ -711,9 +925,11 @@ libraries = {
 }
 
 [connection signal="send_attack" from="." to="InputTracker" method="_on_base_character_send_attack"]
+[connection signal="command_animation" from="MoveListComponent" to="." method="_on_move_list_component_command_animation"]
+[connection signal="command_move" from="InputTracker" to="MoveListComponent" method="_on_input_tracker_command_move"]
 [connection signal="state_entered" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_entered"]
-[connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_input"]
 [connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_attack_enabled_state_input"]
+[connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_input"]
 [connection signal="state_physics_processing" from="StateChart/Root/Grounded" to="." method="_on_jump_enabled_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/StandingLP" to="." method="_on_attacking_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/StandingLP" to="." method="_on_standing_lp_state_exited"]
@@ -721,4 +937,12 @@ libraries = {
 [connection signal="state_exited" from="StateChart/Root/StandingMP" to="." method="_on_standing_lp_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/StandingHP" to="." method="_on_attacking_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/StandingHP" to="." method="_on_standing_lp_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/StandingLK" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/StandingLK" to="." method="_on_standing_lp_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/StandingMK" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/StandingMK" to="." method="_on_standing_lp_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/StandingHK" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/StandingHK" to="." method="_on_standing_lp_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Hadoken_L" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Hadoken_L" to="." method="_on_standing_lp_state_exited"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

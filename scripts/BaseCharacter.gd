@@ -14,6 +14,7 @@ const JUMP_VELOCITY = -400.0
 var _was_on_floor: bool = false
 var is_crouching = false
 var current_attack
+var current_command
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -62,25 +63,42 @@ func _on_attack_enabled_state_input(event):
 		current_movelist = MoveList.crouching_control_dict
 	else:
 		current_movelist = MoveList.standing_control_dict
-	for attack in current_movelist:
-		if Input.is_action_just_pressed(attack):
-			current_attack = attack
-			if !is_on_floor():
-				_state_chart.send_event("jumping_" + attack)
-			elif is_crouching:
-				_state_chart.send_event("crouching_" + attack)
-			else:
-				_state_chart.send_event("standing_" + attack)
-			send_attack.emit(current_attack)
-		else:
-			pass
-		
+	if current_command:
+		pass
+	else:
+		for attack in current_movelist:
+				if Input.is_action_just_pressed(attack):
+					current_attack = attack
+					if !is_on_floor():
+						_state_chart.send_event("jumping_" + attack)
+					elif is_crouching:
+						_state_chart.send_event("crouching_" + attack)
+					else:
+						_state_chart.send_event("standing_" + attack)
+					send_attack.emit(current_attack)
+				else:
+					pass
 func _on_attacking_state_entered():
-	_animation_state_machine.travel(current_attack)
+	if current_attack:
+		_animation_state_machine.travel(current_attack)
+	elif current_command:
+		_animation_state_machine.travel(current_command)
+	else:
+		print("no attack")
 
 func _on_animation_tree_animation_finished(anim_name):
-	if anim_name == current_attack:
+	if anim_name == current_attack or anim_name == current_command:
 		_state_chart.send_event("grounded")
+	else:
+		print(anim_name)
+		print(current_command)
+		print(current_attack)
 
 func _on_grounded_state_entered():
 	current_attack = null
+	current_command = null
+
+
+func _on_move_list_component_command_animation(command):
+	current_command = command
+	_state_chart.send_event(command)
