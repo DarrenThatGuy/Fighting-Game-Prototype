@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_64p7b")
+name = "Hadoken_L"
 animation = ""
 has_command = true
 command = ["2", "3", "6", "lp"]

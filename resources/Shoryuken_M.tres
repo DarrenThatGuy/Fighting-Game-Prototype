@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_elpfp")
+name = ""
 animation = ""
 has_command = true
 command = ["6", "2", "3", "mp"]

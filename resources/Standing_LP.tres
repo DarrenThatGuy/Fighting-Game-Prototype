@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_fndlm")
+name = ""
 animation = ""
 has_command = false
 command = ["lp"]

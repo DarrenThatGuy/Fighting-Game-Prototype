@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_btf67")
+name = ""
 animation = ""
 has_command = false
 command = ["mp"]

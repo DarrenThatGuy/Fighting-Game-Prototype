@@ -25,11 +25,4 @@ func _process(delta):
 	pass
 
 
-func _on_input_tracker_command_move(command : Attack):
-	command_animation.emit(command.name)
-	if command == LHado or command == MHado or command == HHado:
-		print("Shoot Hadoken Projectile")
-	elif command == LShoryu or command == MShoryu or command == HShoryu:
-		print("Do Uppercut animation with hitboxes")
-	elif command == LTatsu or command == MTatsu or command == HTatsu:
-		print("Do Tatsu animation with hitboxes")
+

@@ -9,6 +9,8 @@ signal send_attack(attack)
 
 @export var MoveList : MoveListComponent
 
+var current_movelist
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var _was_on_floor: bool = false
@@ -18,6 +20,12 @@ var current_command
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _on_input_tracker_command_move(command):
+	current_command = command
+
+func _process(delta):
+	pass
+
 func _physics_process(delta):
 	var direction = Input.get_axis("Left", "Right")
 	if direction:
@@ -25,10 +33,14 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
-		
+	if !is_on_floor():
+		current_movelist = MoveList.jumping_control_dict
+	elif is_crouching:
+		current_movelist = MoveList.crouching_control_dict
+	else:
+		current_movelist = MoveList.standing_control_dict
 	if is_on_floor():
 		velocity.y = 0
-		
 		if not _was_on_floor:
 			_was_on_floor = true
 			_state_chart.send_event("grounded")
@@ -45,7 +57,6 @@ func _physics_process(delta):
 			_animation_state_machine.travel("Move")
 	
 		_animation_tree["parameters/Move/blend_position"] = signf(velocity.x)
-	
 
 
 
@@ -55,29 +66,7 @@ func _on_jump_enabled_state_physics_processing(delta):
 		_state_chart.send_event("jump")
 
 
-func _on_attack_enabled_state_input(event):
-	var current_movelist = MoveList.standing_control_dict
-	if !is_on_floor():
-		current_movelist = MoveList.jumping_control_dict
-	elif is_crouching:
-		current_movelist = MoveList.crouching_control_dict
-	else:
-		current_movelist = MoveList.standing_control_dict
-	if current_command:
-		pass
-	else:
-		for attack in current_movelist:
-				if Input.is_action_just_pressed(attack):
-					current_attack = attack
-					if !is_on_floor():
-						_state_chart.send_event("jumping_" + attack)
-					elif is_crouching:
-						_state_chart.send_event("crouching_" + attack)
-					else:
-						_state_chart.send_event("standing_" + attack)
-					send_attack.emit(current_attack)
-				else:
-					pass
+
 func _on_attacking_state_entered():
 	if current_attack:
 		_animation_state_machine.travel(current_attack)
@@ -85,6 +74,7 @@ func _on_attacking_state_entered():
 		_animation_state_machine.travel(current_command)
 	else:
 		print("no attack")
+			
 
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == current_attack or anim_name == current_command:
@@ -98,7 +88,6 @@ func _on_grounded_state_entered():
 	current_attack = null
 	current_command = null
 
-
-func _on_move_list_component_command_animation(command):
-	current_command = command
-	_state_chart.send_event(command)
+func _on_input_tracker_switch_state(state_name, attack):
+	current_attack = attack
+	_state_chart.send_event(state_name)

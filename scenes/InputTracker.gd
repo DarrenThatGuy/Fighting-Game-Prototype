@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var parent = get_parent()
 @export var character_move_list : MoveListComponent
 @onready var commands = character_move_list.command_attacks
 
@@ -7,8 +8,12 @@ var framecount = 0
 var input_direction = Input.get_vector("Left", 'Right', "Up", "Down")
 var input_buffer = []
 var input_buffer_max_size = 15
+var current_command
+var current_attack
 
+signal send_attack(attack)
 signal command_move(command)
+signal switch_state(state_name, attack)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,13 +35,27 @@ func _process(delta):
 		if input_buffer.size() > input_buffer_max_size:
 			input_buffer.pop_front()
 
+func _on_attack_enabled_state_input(event):
+	var parent_movelist = parent.current_movelist
+	for attack in parent_movelist:
+		if Input.is_action_just_pressed(attack):
+			"add command loop function here to call command"
+			current_attack = attack
+			var event_name
+			if !parent.is_on_floor():
+				event_name = "jumping_" + attack
+			elif parent.is_crouching:
+				event_name = "crouching_" + attack
+			else:
+				event_name = "standing_" + attack
+			switch_state.emit(event_name, current_attack)
+			send_attack.emit(current_attack)
+			break
+		else:
+			pass
 
-func _on_base_character_send_attack(attack):
+func _on_send_attack(attack):
 	input_buffer.append(attack)
-	for attack_resource in commands:
-		if find_command(input_buffer, attack_resource) == attack_resource:
-			command_move.emit(attack_resource)
-	input_buffer.clear()
 
 func get_numpad_direction(direction_vector: Vector2) -> String:
 	if direction_vector.x < 0:
@@ -60,23 +79,25 @@ func get_numpad_direction(direction_vector: Vector2) -> String:
 			return "2"
 	return "5"
 	
-func find_command(current_command : Array, attack : Attack) -> Attack:
+func find_command(current_command : Array, movelist) -> Attack:
 	var attack_to_match = []
-	var command_to_check = attack.command
 	var index = 0
 	var command_index = 0
-	if command_to_check.size() > current_command.size():
-		return null
-	while index <= current_command.size()-1 and command_index <= command_to_check.size()-1:
-		if current_command[index] == command_to_check[command_index]:
-			attack_to_match.append(current_command[index])
-			index += 1
-			command_index += 1
+	for attack_to_check in movelist:
+		if attack_to_check.command.size() > current_command.size():
+			return null
+		while index <= current_command.size()-1 and command_index <= attack_to_check.command.size()-1:
+			if current_command[index] == attack_to_check.command[command_index]:
+				attack_to_match.append(current_command[index])
+				index += 1
+				command_index += 1
+			else:
+				index += 1
+		if attack_to_match == attack_to_check.command:
+			print(attack_to_check.command)
+			return attack_to_check.command
 		else:
-			index += 1
-	if attack_to_match == command_to_check:
-		print(attack.command)
-		return attack
-	else:
-		return null
+			return null
 	return null
+
+

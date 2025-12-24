@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("1_ai8fn")
+name = ""
 animation = ""
 has_command = true
-command = ["2", "3", "6", "lp"]
+command = ["6", "2", "3", "lp"]
 damage = 0
 hitstun = 0.0
 hitstop = 0.0

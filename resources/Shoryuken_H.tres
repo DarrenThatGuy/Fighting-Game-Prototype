@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_ey8as")
+name = ""
 animation = ""
 has_command = true
 command = ["6", "2", "3", "hp"]

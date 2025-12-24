@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_20x8c")
+name = ""
 animation = ""
 has_command = true
 command = ["2", "1", "4", "mk"]
