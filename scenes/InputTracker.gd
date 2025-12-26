@@ -36,10 +36,12 @@ func _process(delta):
 			input_buffer.pop_front()
 
 func _on_attack_enabled_state_input(event):
+	
 	var parent_movelist = parent.current_movelist
+	
 	for attack in parent_movelist:
 		if Input.is_action_just_pressed(attack):
-			"add command loop function here to call command"
+
 			current_attack = attack
 			var event_name
 			if !parent.is_on_floor():
@@ -48,14 +50,19 @@ func _on_attack_enabled_state_input(event):
 				event_name = "crouching_" + attack
 			else:
 				event_name = "standing_" + attack
-			switch_state.emit(event_name, current_attack)
+			
 			send_attack.emit(current_attack)
+			if current_command:
+				switch_state.emit(current_command.name, current_command.name)
+			else:
+				switch_state.emit(event_name, current_attack)
 			break
 		else:
 			pass
 
 func _on_send_attack(attack):
 	input_buffer.append(attack)
+	current_command = find_command(input_buffer, commands)
 
 func get_numpad_direction(direction_vector: Vector2) -> String:
 	if direction_vector.x < 0:
@@ -84,8 +91,11 @@ func find_command(current_command : Array, movelist) -> Attack:
 	var index = 0
 	var command_index = 0
 	for attack_to_check in movelist:
+		index = 0
+		command_index = 0
+		attack_to_match.clear()
 		if attack_to_check.command.size() > current_command.size():
-			return null
+			continue
 		while index <= current_command.size()-1 and command_index <= attack_to_check.command.size()-1:
 			if current_command[index] == attack_to_check.command[command_index]:
 				attack_to_match.append(current_command[index])
@@ -94,10 +104,9 @@ func find_command(current_command : Array, movelist) -> Attack:
 			else:
 				index += 1
 		if attack_to_match == attack_to_check.command:
-			print(attack_to_check.command)
-			return attack_to_check.command
+			return attack_to_check
 		else:
-			return null
+			continue
 	return null
 
 

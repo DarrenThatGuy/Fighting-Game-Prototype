@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_fvi76")
-name = ""
+name = "Tatsu_L"
 animation = ""
 has_command = true
 command = ["2", "1", "4", "lk"]

@@ -829,10 +829,10 @@ to = NodePath("../../StandingHK")
 event = &"standing_hk"
 delay_in_seconds = "0.0"
 
-[node name="On L Hadoken" type="Node" parent="StateChart/Root/Grounded"]
+[node name="On Hadoken_L" type="Node" parent="StateChart/Root/Grounded"]
 script = ExtResource("8_fl8ti")
 to = NodePath("../../Hadoken_L")
-event = &"l_hadoken"
+event = &"Hadoken_L"
 delay_in_seconds = "0.0"
 
 [node name="Airborne" type="Node" parent="StateChart/Root"]
