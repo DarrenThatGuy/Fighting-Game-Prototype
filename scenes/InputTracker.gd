@@ -32,6 +32,7 @@ func _process(delta):
 	var current_numpad_input = get_numpad_direction(Input.get_vector("Left", "Right", "Up", "Down"))
 	if (input_buffer.is_empty() or input_buffer.back() != current_numpad_input) and current_numpad_input != "5":
 		input_buffer.push_back(current_numpad_input)
+		print(input_buffer)
 		if input_buffer.size() > input_buffer_max_size:
 			input_buffer.pop_front()
 
