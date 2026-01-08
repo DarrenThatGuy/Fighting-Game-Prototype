@@ -14,6 +14,7 @@ var current_attack
 signal send_attack(attack)
 signal command_move(command)
 signal switch_state(state_name, attack)
+signal jump_signal(type)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +36,8 @@ func _process(delta):
 		print(input_buffer)
 		if input_buffer.size() > input_buffer_max_size:
 			input_buffer.pop_front()
-
+	if current_numpad_input == "7" or current_numpad_input == "8" or current_numpad_input == "9":
+		jump_signal.emit(current_numpad_input)
 func _on_attack_enabled_state_input(event):
 	
 	var parent_movelist = parent.current_movelist

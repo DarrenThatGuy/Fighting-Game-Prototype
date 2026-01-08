@@ -19,6 +19,7 @@ var current_attack
 var current_command
 var direction
 var last_velocity
+var jump_type
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -30,10 +31,9 @@ func _process(delta):
 	var current_animation_name = _animation_state_machine.get_current_node()
 
 func _physics_process(delta):
-	
 	direction = Input.get_axis("Left", "Right")
 	last_velocity = velocity.x
-	if direction and is_on_floor():
+	if direction and is_on_floor() and !is_crouching:
 		velocity.x = direction * SPEED
 	elif !is_on_floor():
 		velocity.x = last_velocity
@@ -66,7 +66,7 @@ func _physics_process(delta):
 				pass
 		else:
 			if !is_on_floor():
-				print("not on floor")
+				pass
 			else:
 				_animation_state_machine.travel("Move")
 	
@@ -76,19 +76,23 @@ func _physics_process(delta):
 func _on_airborne_state_entered():
 	print(_animation_state_machine.get_current_node())
 	velocity.y = JUMP_VELOCITY
-	"""if last_velocity > 0:
-		_animation_state_machine.travel("forward_jump")
-	elif last_velocity < 0:
-		_animation_state_machine.travel("backward_jump")
-	else:"""
 	
 	last_velocity = velocity.x
 	direction = 0
 
 func _on_jump_enabled_state_physics_processing(delta):
-	if Input.is_action_just_pressed("Up"):
+	direction = Input.get_axis("Left", "Right")
+	if jump_type:
+		velocity.y = JUMP_VELOCITY
 		_animation_state_machine.travel("start_jump")
-		_animation_state_machine.travel("vertical_jump")
+		await $AnimationTree.animation_finished
+		if jump_type == "9" or direction > 0:
+			_animation_state_machine.travel("forward_jump")
+		elif jump_type == "7" or direction < 0:
+			_animation_state_machine.travel("backward_jump")
+		elif jump_type == "8" or direction == 0:
+			_animation_state_machine.travel("vertical_jump")
+		
 		_state_chart.send_event("jump")
 
 
@@ -111,6 +115,7 @@ func _on_animation_tree_animation_finished(anim_name):
 func _on_grounded_state_entered():
 	current_attack = null
 	current_command = null
+	jump_type = null
 
 func _on_input_tracker_switch_state(state_name, attack):
 	current_attack = attack
@@ -129,6 +134,7 @@ func _on_crouching_state_entered():
 	_animation_state_machine.travel("crouching")
 
 func _on_crouching_state_processing(delta):
+	direction = 0
 	if Input.is_action_just_released("Down"):
 		_state_chart.send_event("grounded")
 
@@ -137,3 +143,7 @@ func _on_crouching_state_exited():
 
 
 
+
+
+func _on_input_tracker_jump_signal(type):
+	jump_type = type

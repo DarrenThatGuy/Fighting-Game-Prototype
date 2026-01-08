@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://bccgdi3tnkl41"]
+[gd_scene load_steps=166 format=3 uid="uid://bccgdi3tnkl41"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_2iqxl"]
 [ext_resource type="Script" path="res://scenes/InputTracker.gd" id="2_48os6"]
@@ -26,9 +26,11 @@
 [ext_resource type="Texture2D" uid="uid://b31hayw78msh6" path="res://sprites/Idle.png" id="19_q25tr"]
 [ext_resource type="Texture2D" uid="uid://08exigu8lle7" path="res://sprites/Walk_Back.png" id="20_5qqbf"]
 [ext_resource type="Texture2D" uid="uid://dsmpclyaumvm4" path="res://sprites/Walk_Forward.png" id="21_5hvk1"]
+[ext_resource type="Texture2D" uid="uid://cm01rev3v430c" path="res://sprites/Back_Jump.png" id="22_nhic4"]
 [ext_resource type="Texture2D" uid="uid://02w0ycvcxubw" path="res://sprites/Crouch_Start.png" id="22_sphku"]
 [ext_resource type="Texture2D" uid="uid://s3cc0yqnkjo" path="res://sprites/Standing_LP.png" id="23_6ofc0"]
 [ext_resource type="Texture2D" uid="uid://dckyuvxllb14" path="res://sprites/Crouching.png" id="23_pjx2d"]
+[ext_resource type="Texture2D" uid="uid://b1ar0p5hss0dv" path="res://sprites/Forward_Jump.png" id="25_0mfpm"]
 [ext_resource type="Texture2D" uid="uid://cgyhih4hl2jiq" path="res://sprites/Vertical_Jump.png" id="26_3kjga"]
 [ext_resource type="Texture2D" uid="uid://cceqxe86ikva5" path="res://sprites/Jump_Start.png" id="26_ect4g"]
 
@@ -160,6 +162,26 @@ region = Rect2(1008, 0, 112, 112)
 atlas = ExtResource("21_5hvk1")
 region = Rect2(1120, 0, 112, 112)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kq73"]
+atlas = ExtResource("22_nhic4")
+region = Rect2(0, 0, 79, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08n8j"]
+atlas = ExtResource("22_nhic4")
+region = Rect2(79, 0, 79, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhy8w"]
+atlas = ExtResource("22_nhic4")
+region = Rect2(158, 0, 79, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yed2a"]
+atlas = ExtResource("22_nhic4")
+region = Rect2(237, 0, 79, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_878qm"]
+atlas = ExtResource("22_nhic4")
+region = Rect2(316, 0, 79, 121)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6lpct"]
 atlas = ExtResource("22_sphku")
 region = Rect2(0, 0, 88, 106)
@@ -195,6 +217,30 @@ region = Rect2(261, 0, 87, 73)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wob8f"]
 atlas = ExtResource("23_pjx2d")
 region = Rect2(348, 0, 87, 73)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqmke"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(0, 0, 81, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nfvu"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(81, 0, 81, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyx6b"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(162, 0, 81, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdtuo"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(243, 0, 81, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic1pq"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(324, 0, 81, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpuqp"]
+atlas = ExtResource("25_0mfpm")
+region = Rect2(405, 0, 81, 110)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_838co"]
 atlas = ExtResource("23_6ofc0")
@@ -371,6 +417,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1kq73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08n8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhy8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yed2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_878qm")
+}],
+"loop": true,
+"name": &"backward_jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6lpct")
 }, {
 "duration": 1.0,
@@ -404,6 +470,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouching",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqmke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nfvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyx6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdtuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic1pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpuqp")
+}],
+"loop": true,
+"name": &"forward_jump",
 "speed": 12.0
 }, {
 "frames": [{
@@ -504,8 +593,14 @@ blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_d8ynp")
 blend_point_1/pos = 1.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_84inq"]
+animation = &"backward_jump"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bcc1h"]
 animation = &"crouching"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31o0r"]
+animation = &"forward_jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r3bl4"]
 animation = &"hk"
@@ -581,6 +676,15 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a51kc"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4cd2i"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ob64"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vlk47"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sygg7"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0o85r"]
 states/End/position = Vector2(1242, -26)
 states/Hadoken_L/node = SubResource("AnimationNodeAnimation_d1b4d")
@@ -589,8 +693,12 @@ states/Idle/node = SubResource("AnimationNodeAnimation_o8m1l")
 states/Idle/position = Vector2(638, 44)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_d4qik")
 states/Move/position = Vector2(398, 70)
+states/backward_jump/node = SubResource("AnimationNodeAnimation_84inq")
+states/backward_jump/position = Vector2(1105.77, 100)
 states/crouching/node = SubResource("AnimationNodeAnimation_bcc1h")
 states/crouching/position = Vector2(1084, 191)
+states/forward_jump/node = SubResource("AnimationNodeAnimation_31o0r")
+states/forward_jump/position = Vector2(1378.77, 96)
 states/hk/node = SubResource("AnimationNodeAnimation_r3bl4")
 states/hk/position = Vector2(623, 287)
 states/hp/node = SubResource("AnimationNodeAnimation_h2tkb")
@@ -609,7 +717,7 @@ states/start_jump/node = SubResource("AnimationNodeAnimation_yxoso")
 states/start_jump/position = Vector2(1247.77, 191)
 states/vertical_jump/node = SubResource("AnimationNodeAnimation_sywaa")
 states/vertical_jump/position = Vector2(1247.77, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "lp", SubResource("AnimationNodeStateMachineTransition_7mp65"), "lp", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "mp", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "mp", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "hp", SubResource("AnimationNodeStateMachineTransition_68186"), "hp", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx"), "Idle", "lk", SubResource("AnimationNodeStateMachineTransition_d555p"), "lk", "Idle", SubResource("AnimationNodeStateMachineTransition_yserg"), "Idle", "mk", SubResource("AnimationNodeStateMachineTransition_eqmcs"), "mk", "Idle", SubResource("AnimationNodeStateMachineTransition_itkos"), "Idle", "hk", SubResource("AnimationNodeStateMachineTransition_2oj5b"), "hk", "Idle", SubResource("AnimationNodeStateMachineTransition_0csvk"), "Idle", "Hadoken_L", SubResource("AnimationNodeStateMachineTransition_r171n"), "Hadoken_L", "Idle", SubResource("AnimationNodeStateMachineTransition_0jvna"), "Idle", "start_crouch", SubResource("AnimationNodeStateMachineTransition_dqcow"), "start_crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_kebq1"), "crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_1l0fq"), "Idle", "start_jump", SubResource("AnimationNodeStateMachineTransition_bvddw"), "start_jump", "vertical_jump", SubResource("AnimationNodeStateMachineTransition_krcib"), "vertical_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_a51kc")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "lp", SubResource("AnimationNodeStateMachineTransition_7mp65"), "lp", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "mp", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "mp", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "hp", SubResource("AnimationNodeStateMachineTransition_68186"), "hp", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx"), "Idle", "lk", SubResource("AnimationNodeStateMachineTransition_d555p"), "lk", "Idle", SubResource("AnimationNodeStateMachineTransition_yserg"), "Idle", "mk", SubResource("AnimationNodeStateMachineTransition_eqmcs"), "mk", "Idle", SubResource("AnimationNodeStateMachineTransition_itkos"), "Idle", "hk", SubResource("AnimationNodeStateMachineTransition_2oj5b"), "hk", "Idle", SubResource("AnimationNodeStateMachineTransition_0csvk"), "Idle", "Hadoken_L", SubResource("AnimationNodeStateMachineTransition_r171n"), "Hadoken_L", "Idle", SubResource("AnimationNodeStateMachineTransition_0jvna"), "Idle", "start_crouch", SubResource("AnimationNodeStateMachineTransition_dqcow"), "start_crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_kebq1"), "crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_1l0fq"), "Idle", "start_jump", SubResource("AnimationNodeStateMachineTransition_bvddw"), "start_jump", "vertical_jump", SubResource("AnimationNodeStateMachineTransition_krcib"), "vertical_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_a51kc"), "start_jump", "forward_jump", SubResource("AnimationNodeStateMachineTransition_4cd2i"), "start_jump", "backward_jump", SubResource("AnimationNodeStateMachineTransition_5ob64"), "backward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_vlk47"), "forward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_sygg7")]
 graph_offset = Vector2(522.771, 14)
 
 [sub_resource type="Animation" id="Animation_2dktq"]
@@ -1057,46 +1165,6 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_v6iji"]
-resource_name = "vertical_jump"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprites:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"vertical_jump"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprites:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprites:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, -13)]
-}
-
 [sub_resource type="Animation" id="Animation_sad5n"]
 resource_name = "start_jump"
 length = 0.1
@@ -1137,6 +1205,102 @@ tracks/2/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_v6iji"]
+resource_name = "vertical_jump"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"vertical_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, -13)]
+}
+
+[sub_resource type="Animation" id="Animation_xw8oy"]
+resource_name = "forward_jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"forward_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_1kajr"]
+resource_name = "backward_jump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"backward_jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_deb8v"]
 _data = {
 "Hadoken_L": SubResource("Animation_2dktq"),
@@ -1144,7 +1308,9 @@ _data = {
 "RESET": SubResource("Animation_q2uky"),
 "WalkBack": SubResource("Animation_6306p"),
 "WalkForward": SubResource("Animation_o2v5g"),
+"backward_jump": SubResource("Animation_1kajr"),
 "crouching": SubResource("Animation_cbhxj"),
+"forward_jump": SubResource("Animation_xw8oy"),
 "hk": SubResource("Animation_jqeru"),
 "hp": SubResource("Animation_kakdr"),
 "lk": SubResource("Animation_cxikq"),
@@ -1438,12 +1604,13 @@ libraries = {
 
 [connection signal="send_attack" from="." to="InputTracker" method="_on_base_character_send_attack"]
 [connection signal="command_animation" from="MoveListComponent" to="." method="_on_move_list_component_command_animation"]
+[connection signal="jump_signal" from="InputTracker" to="." method="_on_input_tracker_jump_signal"]
 [connection signal="send_attack" from="InputTracker" to="InputTracker" method="_on_send_attack"]
 [connection signal="switch_state" from="InputTracker" to="." method="_on_input_tracker_switch_state"]
 [connection signal="state_entered" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Grounded" to="InputTracker" method="_on_grounded_state_entered"]
-[connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_attack_enabled_state_input"]
 [connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_input"]
+[connection signal="state_input" from="StateChart/Root/Grounded" to="." method="_on_attack_enabled_state_input"]
 [connection signal="state_input" from="StateChart/Root/Grounded" to="InputTracker" method="_on_attack_enabled_state_input"]
 [connection signal="state_physics_processing" from="StateChart/Root/Grounded" to="." method="_on_jump_enabled_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Airborne" to="." method="_on_airborne_state_entered"]
