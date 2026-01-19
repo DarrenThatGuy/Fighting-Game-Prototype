@@ -74,18 +74,17 @@ func _physics_process(delta):
 
 
 func _on_airborne_state_entered():
-	print(_animation_state_machine.get_current_node())
-	velocity.y = JUMP_VELOCITY
 	
 	last_velocity = velocity.x
 	direction = 0
 
 func _on_jump_enabled_state_physics_processing(delta):
 	direction = Input.get_axis("Left", "Right")
+	
 	if jump_type:
-		velocity.y = JUMP_VELOCITY
 		_animation_state_machine.travel("start_jump")
 		await $AnimationTree.animation_finished
+		velocity.y = JUMP_VELOCITY
 		if jump_type == "9" or direction > 0:
 			_animation_state_machine.travel("forward_jump")
 		elif jump_type == "7" or direction < 0:
@@ -140,10 +139,6 @@ func _on_crouching_state_processing(delta):
 
 func _on_crouching_state_exited():
 	is_crouching = false
-
-
-
-
 
 func _on_input_tracker_jump_signal(type):
 	jump_type = type
