@@ -2,18 +2,11 @@ class_name RyuMoveListComponent extends MoveListComponent
 
 signal command_animation(command)
 
+@export var Hado : Special_Attack
+@export var Shoryu : Special_Attack
+@export var Tatsu : Special_Attack
 
-@export var LHado : Attack
-@export var MHado : Attack
-@export var HHado : Attack
-@export var LShoryu : Attack
-@export var MShoryu : Attack
-@export var HShoryu : Attack
-@export var LTatsu : Attack
-@export var MTatsu : Attack
-@export var HTatsu : Attack
-
-@onready var command_attacks = [LHado, MHado, HHado, LShoryu, MShoryu, HShoryu, LTatsu, MTatsu, HTatsu]
+@onready var command_attacks = [Hado, Shoryu, Tatsu]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

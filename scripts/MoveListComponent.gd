@@ -1,27 +1,16 @@
 class_name MoveListComponent extends Node
 
 
-@export var standing_LP : Attack
-@export var standing_MP : Attack
-@export var standing_HP : Attack
-@export var standing_LK : Attack
-@export var standing_MK : Attack
-@export var standing_HK : Attack
+@export var standing_light_combo : Attack
+@export var standing_medium_combo : Attack
+@export var standing_heavy_combo : Attack
 
 @export var crouching_LP : Attack
 @export var crouching_MP : Attack
 @export var crouching_HP : Attack
-@export var crouching_LK : Attack
-@export var crouching_MK : Attack
-@export var crouching_HK : Attack
 
 @export var jumping_LP : Attack
 @export var jumping_MP : Attack
 @export var jumping_HP : Attack
-@export var jumping_LK : Attack
-@export var jumping_MK : Attack
-@export var jumping_HK : Attack
 
-@onready var standing_control_dict = {"lp" : standing_LP, "mp" : standing_MP, "hp" : standing_HP, "lk" : standing_LK, "mk" : standing_MK, "hk" : standing_HK }
-@onready var crouching_control_dict = {}
-@onready var jumping_control_dict = {}
+@onready var control_dict = {"light_combo" : standing_light_combo, "medium_combo" : standing_medium_combo, "heavy_combo" : standing_heavy_combo}

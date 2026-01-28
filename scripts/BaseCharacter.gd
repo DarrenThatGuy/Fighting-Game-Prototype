@@ -9,8 +9,6 @@ signal send_attack(attack)
 
 @export var MoveList : MoveListComponent
 
-var current_movelist
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var _was_on_floor: bool = false
@@ -40,12 +38,6 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
-	if !is_on_floor():
-		current_movelist = MoveList.jumping_control_dict
-	elif is_crouching:
-		current_movelist = MoveList.crouching_control_dict
-	else:
-		current_movelist = MoveList.standing_control_dict
 	if is_on_floor():
 		velocity.y = 0
 		if not _was_on_floor:
@@ -57,7 +49,6 @@ func _physics_process(delta):
 			_was_on_floor = false
 			
 			_state_chart.send_event("airborne")
-
 	if current_attack == null:
 		if velocity.length_squared() <= 0.005:
 			if !is_crouching:
@@ -117,7 +108,7 @@ func _on_grounded_state_entered():
 	jump_type = null
 
 func _on_input_tracker_switch_state(state_name, attack):
-	current_attack = attack
+	current_attack = state_name
 	_state_chart.send_event(state_name)
 
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://7co3cbd3ljfy"]
+
+[ext_resource type="Script" path="res://resources/attack.gd" id="1_bb3y6"]
+
+[resource]
+script = ExtResource("1_bb3y6")
+name = "Medium Combo 1"
+animation = ""
+damage = 0
+hitstun = 0.0
+hitstop = 0.0

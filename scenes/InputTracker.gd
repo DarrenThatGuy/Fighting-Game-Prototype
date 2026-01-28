@@ -18,7 +18,6 @@ signal jump_signal(type)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	framecount = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,12 +38,9 @@ func _process(delta):
 	if current_numpad_input == "7" or current_numpad_input == "8" or current_numpad_input == "9":
 		jump_signal.emit(current_numpad_input)
 func _on_attack_enabled_state_input(event):
-	
-	var parent_movelist = parent.current_movelist
-	
+	var parent_movelist = parent.MoveList.control_dict
 	for attack in parent_movelist:
 		if Input.is_action_just_pressed(attack):
-
 			current_attack = attack
 			var event_name
 			if !parent.is_on_floor():
@@ -53,7 +49,6 @@ func _on_attack_enabled_state_input(event):
 				event_name = "crouching_" + attack
 			else:
 				event_name = "standing_" + attack
-			
 			send_attack.emit(current_attack)
 			if current_command:
 				switch_state.emit(current_command.name, current_command.name)
@@ -89,15 +84,25 @@ func get_numpad_direction(direction_vector: Vector2) -> String:
 			return "2"
 	return "5"
 	
-func find_command(current_command : Array, movelist) -> Attack:
+func find_command(current_command : Array, movelist) -> Special_Attack:
 	var attack_to_match = []
+	var command_type
 	var index = 0
 	var command_index = 0
 	for attack_to_check in movelist:
+		match attack_to_check.input_type:
+			"HADO":
+				command_type = ["2", "3", "6"]
+			"TATSU":
+				command_type = ["2", "1", "4"]
+			"DD":
+				command_type = ["2", "2"]
+			_:
+				return null
 		index = 0
 		command_index = 0
 		attack_to_match.clear()
-		if attack_to_check.command.size() > current_command.size():
+		if command_type.size() > current_command.size():
 			continue
 		while index <= current_command.size()-1 and command_index <= attack_to_check.command.size()-1:
 			if current_command[index] == attack_to_check.command[command_index]:

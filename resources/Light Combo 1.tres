@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://cafm06d5vhpp"]
+
+[ext_resource type="Script" path="res://resources/attack.gd" id="1_us70c"]
+
+[resource]
+script = ExtResource("1_us70c")
+name = "Light Combo 1"
+animation = ""
+damage = 0
+hitstun = 0.0
+hitstop = 0.0

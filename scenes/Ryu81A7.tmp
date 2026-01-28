@@ -1,16 +1,13 @@
-[gd_scene load_steps=144 format=3 uid="uid://bccgdi3tnkl41"]
+[gd_scene load_steps=141 format=3 uid="uid://bccgdi3tnkl41"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_2iqxl"]
 [ext_resource type="Script" path="res://scenes/InputTracker.gd" id="2_48os6"]
 [ext_resource type="Script" path="res://scripts/Ryu_MoveListComponent.gd" id="2_ssthi"]
 [ext_resource type="Resource" uid="uid://ba50lftygk3fm" path="res://resources/Hado.tres" id="3_ym2sx"]
 [ext_resource type="Resource" uid="uid://cd0eahd60fmc4" path="res://resources/Tatsu.tres" id="4_33qlo"]
-[ext_resource type="Resource" uid="uid://cafm06d5vhpp" path="res://resources/Light Combo 1.tres" id="5_b401r"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_tslu3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_gufvn"]
-[ext_resource type="Resource" uid="uid://7co3cbd3ljfy" path="res://resources/Medium Combo 1.tres" id="6_jinfp"]
 [ext_resource type="Texture2D" uid="uid://cos8tkw3sq3we" path="res://icon.svg" id="6_p4y45"]
-[ext_resource type="Resource" uid="uid://crt52e3iw8ve6" path="res://resources/Heavy Combo 1.tres" id="7_8rm3u"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_77jbi"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_fl8ti"]
 [ext_resource type="Texture2D" uid="uid://b31hayw78msh6" path="res://sprites/Idle.png" id="19_q25tr"]
@@ -593,13 +590,13 @@ animation = &"crouching"
 animation = &"forward_jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2tkb"]
-animation = &"standing_heavy_combo"
+animation = &"hp"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_srv2h"]
 animation = &"standing_light_combo"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ab601"]
-animation = &"standing_medium_combo"
+animation = &"mp"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fwfms"]
 animation = &"start_crouch"
@@ -667,19 +664,19 @@ states/crouching/node = SubResource("AnimationNodeAnimation_bcc1h")
 states/crouching/position = Vector2(1084, 191)
 states/forward_jump/node = SubResource("AnimationNodeAnimation_31o0r")
 states/forward_jump/position = Vector2(1378.77, 96)
-states/standing_heavy_combo/node = SubResource("AnimationNodeAnimation_h2tkb")
-states/standing_heavy_combo/position = Vector2(573, 223)
-states/standing_light_combo/node = SubResource("AnimationNodeAnimation_srv2h")
-states/standing_light_combo/position = Vector2(172, 223)
-states/standing_medium_combo/node = SubResource("AnimationNodeAnimation_ab601")
-states/standing_medium_combo/position = Vector2(369, 223)
+states/heavy_combo/node = SubResource("AnimationNodeAnimation_h2tkb")
+states/heavy_combo/position = Vector2(623, 191)
+states/light_combo/node = SubResource("AnimationNodeAnimation_srv2h")
+states/light_combo/position = Vector2(140, 191)
+states/medium_combo/node = SubResource("AnimationNodeAnimation_ab601")
+states/medium_combo/position = Vector2(369, 223)
 states/start_crouch/node = SubResource("AnimationNodeAnimation_fwfms")
 states/start_crouch/position = Vector2(1043, 64)
 states/start_jump/node = SubResource("AnimationNodeAnimation_yxoso")
 states/start_jump/position = Vector2(1247.77, 191)
 states/vertical_jump/node = SubResource("AnimationNodeAnimation_sywaa")
 states/vertical_jump/position = Vector2(1247.77, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "standing_light_combo", SubResource("AnimationNodeStateMachineTransition_7mp65"), "standing_light_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "standing_medium_combo", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "standing_medium_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "standing_heavy_combo", SubResource("AnimationNodeStateMachineTransition_68186"), "standing_heavy_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx"), "Idle", "Hadoken_L", SubResource("AnimationNodeStateMachineTransition_r171n"), "Hadoken_L", "Idle", SubResource("AnimationNodeStateMachineTransition_0jvna"), "Idle", "start_crouch", SubResource("AnimationNodeStateMachineTransition_dqcow"), "start_crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_kebq1"), "crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_1l0fq"), "Idle", "start_jump", SubResource("AnimationNodeStateMachineTransition_bvddw"), "start_jump", "vertical_jump", SubResource("AnimationNodeStateMachineTransition_krcib"), "vertical_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_a51kc"), "start_jump", "forward_jump", SubResource("AnimationNodeStateMachineTransition_4cd2i"), "start_jump", "backward_jump", SubResource("AnimationNodeStateMachineTransition_5ob64"), "backward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_vlk47"), "forward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_sygg7")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_eo5ys"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_rfrf0"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_vnrjm"), "Idle", "light_combo", SubResource("AnimationNodeStateMachineTransition_7mp65"), "light_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_m3krd"), "Idle", "medium_combo", SubResource("AnimationNodeStateMachineTransition_mnhxc"), "medium_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_s7x56"), "Idle", "heavy_combo", SubResource("AnimationNodeStateMachineTransition_68186"), "heavy_combo", "Idle", SubResource("AnimationNodeStateMachineTransition_udxcx"), "Idle", "Hadoken_L", SubResource("AnimationNodeStateMachineTransition_r171n"), "Hadoken_L", "Idle", SubResource("AnimationNodeStateMachineTransition_0jvna"), "Idle", "start_crouch", SubResource("AnimationNodeStateMachineTransition_dqcow"), "start_crouch", "crouching", SubResource("AnimationNodeStateMachineTransition_kebq1"), "crouching", "Idle", SubResource("AnimationNodeStateMachineTransition_1l0fq"), "Idle", "start_jump", SubResource("AnimationNodeStateMachineTransition_bvddw"), "start_jump", "vertical_jump", SubResource("AnimationNodeStateMachineTransition_krcib"), "vertical_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_a51kc"), "start_jump", "forward_jump", SubResource("AnimationNodeStateMachineTransition_4cd2i"), "start_jump", "backward_jump", SubResource("AnimationNodeStateMachineTransition_5ob64"), "backward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_vlk47"), "forward_jump", "Idle", SubResource("AnimationNodeStateMachineTransition_sygg7")]
 graph_offset = Vector2(26.771, 11)
 
 [sub_resource type="Animation" id="Animation_2dktq"]
@@ -969,7 +966,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_kakdr"]
-resource_name = "standing_heavy_combo"
+resource_name = "hp"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -995,48 +992,8 @@ tracks/1/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_wdfs3"]
-resource_name = "standing_light_combo"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprites:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"lp"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprites:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprites:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(21, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_fatg6"]
-resource_name = "standing_medium_combo"
+resource_name = "mp"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1182,6 +1139,46 @@ tracks/2/keys = {
 "values": [Vector2(2, -13)]
 }
 
+[sub_resource type="Animation" id="Animation_wdfs3"]
+resource_name = "standing_light_combo"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprites:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"lp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprites:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(21, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_deb8v"]
 _data = {
 "Hadoken_L": SubResource("Animation_2dktq"),
@@ -1192,9 +1189,9 @@ _data = {
 "backward_jump": SubResource("Animation_1kajr"),
 "crouching": SubResource("Animation_cbhxj"),
 "forward_jump": SubResource("Animation_xw8oy"),
-"standing_heavy_combo": SubResource("Animation_kakdr"),
+"hp": SubResource("Animation_kakdr"),
+"mp": SubResource("Animation_fatg6"),
 "standing_light_combo": SubResource("Animation_wdfs3"),
-"standing_medium_combo": SubResource("Animation_fatg6"),
 "start_crouch": SubResource("Animation_ckffo"),
 "start_jump": SubResource("Animation_sad5n"),
 "vertical_jump": SubResource("Animation_v6iji")
@@ -1209,9 +1206,6 @@ MoveList = NodePath("MoveListComponent")
 script = ExtResource("2_ssthi")
 Hado = ExtResource("3_ym2sx")
 Tatsu = ExtResource("4_33qlo")
-standing_light_combo = ExtResource("5_b401r")
-standing_medium_combo = ExtResource("6_jinfp")
-standing_heavy_combo = ExtResource("7_8rm3u")
 
 [node name="InputTracker" type="Node2D" parent="." node_paths=PackedStringArray("character_move_list")]
 script = ExtResource("2_48os6")
@@ -1251,7 +1245,7 @@ delay_in_seconds = "0.0"
 
 [node name="On Standing Light Combo" type="Node" parent="StateChart/Root/Grounded"]
 script = ExtResource("8_fl8ti")
-to = NodePath("../../Standing Light Combo")
+to = NodePath("../../Light Combo")
 event = &"standing_light_combo"
 delay_in_seconds = "0.0"
 
@@ -1294,10 +1288,10 @@ to = NodePath("../../Grounded")
 event = &"grounded"
 delay_in_seconds = "0.0"
 
-[node name="Standing Light Combo" type="Node" parent="StateChart/Root"]
+[node name="Light Combo" type="Node" parent="StateChart/Root"]
 script = ExtResource("7_77jbi")
 
-[node name="On Grounded" type="Node" parent="StateChart/Root/Standing Light Combo"]
+[node name="On Grounded" type="Node" parent="StateChart/Root/Light Combo"]
 script = ExtResource("8_fl8ti")
 to = NodePath("../../Grounded")
 event = &"grounded"
@@ -1367,7 +1361,6 @@ libraries = {
 
 [connection signal="send_attack" from="." to="InputTracker" method="_on_base_character_send_attack"]
 [connection signal="command_animation" from="MoveListComponent" to="." method="_on_move_list_component_command_animation"]
-[connection signal="send_attack" from="InputTracker" to="InputTracker" method="_on_send_attack"]
 [connection signal="switch_state" from="InputTracker" to="." method="_on_input_tracker_switch_state"]
 [connection signal="state_entered" from="StateChart/Root/Grounded" to="." method="_on_grounded_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Grounded" to="InputTracker" method="_on_grounded_state_entered"]
@@ -1376,8 +1369,8 @@ libraries = {
 [connection signal="state_input" from="StateChart/Root/Grounded" to="InputTracker" method="_on_attack_enabled_state_input"]
 [connection signal="state_physics_processing" from="StateChart/Root/Grounded" to="." method="_on_jump_enabled_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Airborne" to="." method="_on_airborne_state_entered"]
-[connection signal="state_entered" from="StateChart/Root/Standing Light Combo" to="." method="_on_attacking_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Standing Light Combo" to="." method="_on_standing_lp_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Light Combo" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Light Combo" to="." method="_on_standing_lp_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/Medium Combo" to="." method="_on_attacking_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Medium Combo" to="." method="_on_standing_lp_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/Heavy Combo" to="." method="_on_attacking_state_entered"]
